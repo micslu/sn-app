@@ -24,29 +24,37 @@ public class UserService {
 
     public List<Post> getPostsByUserId(String id) {
         User user = validateUser(id);
-        return user.getPosts();
+        return user.getPosts().stream().sorted(Comparator.comparing(Post::getCreationTimestamp).reversed()).collect(Collectors.toList());
     }
 
-    public void followUser(String userId, String userToFollowId) {
+    public void addUserToFollow(String userId, String userToFollowId) {
         User user = validateUser(userId);
         User userToFollow = validateUser(userToFollowId);
         user.getUsersToFollow().add(userToFollow);
         userRepository.save(user);
     }
 
-    User validateUser(String id) {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-    }
-
-    void createUser(String id) {
-        userRepository.save(new User(id));
-    }
-
-    public List<Post> getFollowsPostsByUserId(String id) {
+    public List<Post> getFollowedUsersPostsByUserId(String id) {
         User user = validateUser(id);
         return user.getUsersToFollow().stream().map(User::getPosts)
                 .flatMap(Collection::stream)
                 .sorted(Comparator.comparing(Post::getCreationTimestamp).reversed())
                 .collect(Collectors.toList());
+    }
+
+    public void createUserIfNotCreated(String userId) {
+        try {
+            validateUser(userId);
+        } catch (UserNotFoundException ex) {
+            createUser(userId);
+        }
+    }
+
+    User validateUser(String id) {
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    private void createUser(String id) {
+        userRepository.save(new User(id));
     }
 }

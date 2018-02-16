@@ -1,7 +1,6 @@
 package com.hsbc.codeChallenge.services;
 
 import com.hsbc.codeChallenge.entities.Post;
-import com.hsbc.codeChallenge.exceptions.UserNotFoundException;
 import com.hsbc.codeChallenge.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +18,7 @@ public class PostService {
     }
 
     public void createPost(String userId, String postText) {
-        try {
-            userService.validateUser(userId);
-        } catch (UserNotFoundException ex) {
-            userService.createUser(userId);
-        }
+        userService.createUserIfNotCreated(userId);
         postRepository.save(new Post(postText, userId));
     }
 }

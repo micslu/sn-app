@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/api")
 public class UserController {
 
     @Autowired
@@ -32,7 +33,7 @@ public class UserController {
 
     @RequestMapping(value = "/users/{id}/follow", method = RequestMethod.GET)
     public List<Post> getUserFollowsPosts(@PathVariable String id) {
-        return userService.getFollowsPostsByUserId(id);
+        return userService.getFollowedUsersPostsByUserId(id);
     }
 
     @RequestMapping(value = "/users/{id}/follow",
@@ -40,6 +41,6 @@ public class UserController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public void followUser(@PathVariable String id, @RequestParam String userToFollowId) {
-        userService.followUser(id, userToFollowId);
+        userService.addUserToFollow(id, userToFollowId);
     }
 }

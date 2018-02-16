@@ -34,15 +34,19 @@ public class UserServiceTest {
 
     @Test
     @Transactional
-    public void shouldReturnPostsWhenUserExists() {
+    public void shouldReturnPostsInReversedChronologicalOrderWhenUserExists() {
         String userId = "userId";
         User user = new User(userId);
-        user.setPosts(Arrays.asList(new Post("Post1", userId)));
+        Post olderPost = new Post("Older Post", userId);
+        Post newerPost = new Post("Newer Post", userId);
+        newerPost.setCreationTimestamp(olderPost.getCreationTimestamp() + 2000);
+        user.setPosts(Arrays.asList(olderPost, newerPost));
         userRepository.save(user);
         userRepository.flush();
         List<Post> posts = userService.getPostsByUserId(userId);
-        assertEquals(1, posts.size());
-        assertEquals("Post1", posts.get(0).getText());
+        assertEquals(2, posts.size());
+        assertEquals("Newer Post", posts.get(0).getText());
+        assertEquals("Older Post", posts.get(1).getText());
     }
 
     @Test
