@@ -12,8 +12,12 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public List<Post> getPostsByUserId(String id) {
         User user = validateUser(id);
@@ -24,7 +28,7 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    void createUser() {
-        userRepository.save(new User());
+    void createUser(String id) {
+        userRepository.save(new User(id));
     }
 }

@@ -18,7 +18,7 @@ public class PostService {
         try {
             userService.validateUser(userId);
         } catch (UserNotFoundException ex) {
-            userService.createUser();
+            userService.createUser(userId);
         }
         postRepository.save(new Post(postText, userId));
     }

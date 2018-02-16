@@ -1,55 +1,61 @@
 package com.hsbc.codeChallenge.services;
 
+import com.hsbc.codeChallenge.Application;
 import com.hsbc.codeChallenge.entities.Post;
 import com.hsbc.codeChallenge.entities.User;
 import com.hsbc.codeChallenge.exceptions.UserNotFoundException;
 import com.hsbc.codeChallenge.repositories.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class)
 public class UserServiceTest {
 
+    @Autowired
     private UserRepository userRepository;
     private UserService userService;
 
     @Before
-    public void setUp(){
-        userRepository = Mockito.mock(UserRepository.class);
+    public void setUp() {
         userService = new UserService(userRepository);
     }
 
     @Test
-    public void shouldReturnPostsWhenUserCreated() {
+    @Transactional
+    public void shouldReturnPostsWhenUserExists() {
         String userId = "userId";
-        User user = new User();
-        user.setId(userId);
+        User user = new User(userId);
         user.setPosts(Arrays.asList(new Post("Post1", userId)));
-        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
+        userRepository.save(user);
+        userRepository.flush();
         List<Post> posts = userService.getPostsByUserId(userId);
         assertEquals(1, posts.size());
         assertEquals("Post1", posts.get(0).getText());
     }
 
     @Test
-    public void shouldReturnUserWhenUserCreated() {
+    public void validateUserShouldReturnUserWhenUserCreated() {
         String userId = "userId";
-        when(userRepository.findById(userId)).thenReturn(Optional.of(new User()));
+        userRepository.save(new User(userId));
         User user = userService.validateUser(userId);
         assertNotNull(user);
     }
 
     @Test(expected = UserNotFoundException.class)
-    public void shoulThrowUserNotFoundExceptionWhenUserNotCreated() {
-        String userId = "userId";
-        when(userRepository.findById(userId)).thenReturn(Optional.empty());
+    public void validateUserShouldThrowUserNotFoundExceptionWhenUserNotCreated() {
+        String userId = "notExistingUserId";
         userService.validateUser(userId);
     }
 
