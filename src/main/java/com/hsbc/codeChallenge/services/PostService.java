@@ -9,10 +9,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class PostService {
 
-    @Autowired
     private UserService userService;
-    @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    public PostService(UserService userService, PostRepository postRepository) {
+        this.userService = userService;
+        this.postRepository = postRepository;
+    }
 
     public void createPost(String userId, String postText) {
         try {
