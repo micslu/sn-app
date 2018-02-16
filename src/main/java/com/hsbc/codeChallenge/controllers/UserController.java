@@ -29,4 +29,17 @@ public class UserController {
     public void createUserPost(@PathVariable String id, @RequestParam String text) {
         postService.createPost(id, text);
     }
+
+    @RequestMapping(value = "/users/{id}/follow", method = RequestMethod.GET)
+    public List<Post> getUserFollowsPosts(@PathVariable String id) {
+        return userService.getFollowsPostsByUserId(id);
+    }
+
+    @RequestMapping(value = "/users/{id}/follow",
+            params = {"userToFollowId"},
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public void followUser(@PathVariable String id, @RequestParam String userToFollowId) {
+        userService.followUser(id, userToFollowId);
+    }
 }

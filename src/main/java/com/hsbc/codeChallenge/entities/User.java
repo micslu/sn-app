@@ -1,5 +1,7 @@
 package com.hsbc.codeChallenge.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,10 +16,19 @@ public class User {
     private String id;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_ID")
-    List<Post> posts = new ArrayList<>();
+    private List<Post> posts = new ArrayList<>();
 
-    private User(){}
-    public User(String id){
+    @JoinTable(name = "USER_FOLLWS", joinColumns = {
+            @JoinColumn(name = "FOLLOWEB_BY", referencedColumnName = "ID", nullable =   false)}, inverseJoinColumns = {
+            @JoinColumn(name = "FOLLOWED_USER", referencedColumnName = "ID", nullable = false)})
+    @ManyToMany
+    @JsonIgnore
+    private Set<User> usersToFollow = new HashSet<>();
+
+    private User() {
+    }
+
+    public User(String id) {
         this.id = id;
     }
 
@@ -35,5 +46,13 @@ public class User {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+    }
+
+    public Set<User> getUsersToFollow() {
+        return usersToFollow;
+    }
+
+    public void setUsersToFollow(Set<User> usersToFollow) {
+        this.usersToFollow = usersToFollow;
     }
 }
