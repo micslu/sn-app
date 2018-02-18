@@ -1,17 +1,16 @@
-package com.hsbc.codeChallenge.services;
+package com.micslu.codeChallenge.services;
 
-import com.hsbc.codeChallenge.Application;
-import com.hsbc.codeChallenge.entities.Post;
-import com.hsbc.codeChallenge.entities.User;
-import com.hsbc.codeChallenge.exceptions.UserNotFoundException;
-import com.hsbc.codeChallenge.repositories.UserRepository;
+import com.micslu.codeChallenge.Application;
+import com.micslu.codeChallenge.entities.Post;
+import com.micslu.codeChallenge.entities.User;
+import com.micslu.codeChallenge.exceptions.UserNotFoundException;
+import com.micslu.codeChallenge.repositories.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import sun.rmi.server.UnicastServerRef;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;

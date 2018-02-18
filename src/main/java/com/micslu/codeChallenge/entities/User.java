@@ -1,4 +1,4 @@
-package com.hsbc.codeChallenge.entities;
+package com.micslu.codeChallenge.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

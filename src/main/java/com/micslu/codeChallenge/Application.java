@@ -1,4 +1,4 @@
-package com.hsbc.codeChallenge;
+package com.micslu.codeChallenge;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,9 +1,9 @@
-package com.hsbc.codeChallenge.services;
+package com.micslu.codeChallenge.services;
 
-import com.hsbc.codeChallenge.entities.Post;
-import com.hsbc.codeChallenge.entities.User;
-import com.hsbc.codeChallenge.exceptions.UserNotFoundException;
-import com.hsbc.codeChallenge.repositories.UserRepository;
+import com.micslu.codeChallenge.entities.Post;
+import com.micslu.codeChallenge.entities.User;
+import com.micslu.codeChallenge.exceptions.UserNotFoundException;
+import com.micslu.codeChallenge.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

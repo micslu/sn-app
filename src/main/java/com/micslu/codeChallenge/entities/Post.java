@@ -1,4 +1,4 @@
-package com.hsbc.codeChallenge.entities;
+package com.micslu.codeChallenge.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;

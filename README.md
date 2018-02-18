@@ -1,7 +1,7 @@
 # Building and running
 To build and run the application requires [Maven](https://maven.apache.org/) installed.
 
-Use the below command to start the application:
+Use the below command to start the application. By default it will be started at localhost:8080.
 ```
 mvn spring-boot:run
 ```
