@@ -17,7 +17,7 @@ Creating a new post (and user if not created yet):
 ```
 POST /api/users/:user_id/posts?text=:post_text
 ```
-Showing all posts created by a people a user follows:
+Showing all posts created by people a user follows:
 ```
 GET /api/users/:user_id/follow
 ```
