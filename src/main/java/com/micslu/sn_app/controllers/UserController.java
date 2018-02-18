@@ -1,7 +1,7 @@
-package com.micslu.codeChallenge.controllers;
+package com.micslu.sn_app.controllers;
 
-import com.micslu.codeChallenge.entities.Post;
-import com.micslu.codeChallenge.services.UserService;
+import com.micslu.sn_app.entities.Post;
+import com.micslu.sn_app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

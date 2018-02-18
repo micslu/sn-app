@@ -1,9 +1,9 @@
-package com.micslu.codeChallenge.services;
+package com.micslu.sn_app.services;
 
-import com.micslu.codeChallenge.entities.Post;
-import com.micslu.codeChallenge.entities.User;
-import com.micslu.codeChallenge.exceptions.UserNotFoundException;
-import com.micslu.codeChallenge.repositories.UserRepository;
+import com.micslu.sn_app.entities.Post;
+import com.micslu.sn_app.entities.User;
+import com.micslu.sn_app.exceptions.UserNotFoundException;
+import com.micslu.sn_app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

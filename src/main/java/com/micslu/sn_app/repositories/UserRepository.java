@@ -1,6 +1,6 @@
-package com.micslu.codeChallenge.repositories;
+package com.micslu.sn_app.repositories;
 
-import com.micslu.codeChallenge.entities.User;
+import com.micslu.sn_app.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

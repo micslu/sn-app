@@ -1,4 +1,4 @@
-package com.micslu.codeChallenge.entities;
+package com.micslu.sn_app.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
