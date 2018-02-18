@@ -1,7 +1,6 @@
 package com.hsbc.codeChallenge.controllers;
 
 import com.hsbc.codeChallenge.entities.Post;
-import com.hsbc.codeChallenge.services.PostService;
 import com.hsbc.codeChallenge.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -15,8 +14,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private PostService postService;
 
     @RequestMapping(value = "/users/{id}/posts", method = RequestMethod.GET)
     public List<Post> getUserPosts(@PathVariable String id) {
@@ -28,7 +25,7 @@ public class UserController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public void createUserPost(@PathVariable String id, @RequestParam String text) {
-        postService.createPost(id, text);
+        userService.createPost(id, text);
     }
 
     @RequestMapping(value = "/users/{id}/follow", method = RequestMethod.GET)

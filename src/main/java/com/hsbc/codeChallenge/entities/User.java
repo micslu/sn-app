@@ -15,7 +15,6 @@ public class User {
     @Id
     private String id;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "USER_ID")
     private List<Post> posts = new ArrayList<>();
 
     @JoinTable(name = "USER_FOLLWS", joinColumns = {
